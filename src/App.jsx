@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import Navbar from './components/Navbar'
+import { v4 as uuidv4 } from 'uuid';
+
+
 
 import './App.css'
 
@@ -17,7 +20,7 @@ function App() {
   }
   const handleAdd = () => {
 
-    setTodos([...todos, {todo, isComplete: false}])
+    setTodos([...todos, {id:uuidv4(), todo, isComplete: false}])
     setTodo("");
 
   }
@@ -26,9 +29,12 @@ function App() {
   }
 
 
+
+
   return (
     <>
       <Navbar />
+
       <div className='container mx-auto bg-slate-200 rounded-xl p-3 m-5 min-h-[80vh]'>
 
         <div className="addTodo">
@@ -46,8 +52,8 @@ function App() {
         <div className="todos ">
           {todos.map((item) => (
           
-          <div key={todo} className="todo flex w-1/4">
-
+          <div key={todo} className="todo flex w-1/4 justify-between">
+            <input type="checkbox" name="checkbox" id=""  value={todo.isComplete} />
             <div className={item.isComplete ? "line-through":""}>{item.todo}</div>
 
             <div className='buttons'>
@@ -61,6 +67,6 @@ function App() {
       </div>
     </>
   )
-}
 
+}
 export default App
